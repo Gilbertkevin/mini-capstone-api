@@ -1,0 +1,5 @@
+###
+GET http://localhost:3000/first_product.json 
+
+###
+GET http://localhost:3000/all_products.json
