@@ -1,5 +1,30 @@
 ###
-GET http://localhost:3000/first_product.json 
+GET http://localhost:3000/products.json
 
 ###
-GET http://localhost:3000/all_products.json
+GET http://localhost:3000/products/1.json
+
+###rails s
+POST http://localhost:3000/products
+content-type: application/json
+
+{
+  "input_name": "basketball",
+  "input_price": 40,
+  "input_url": "www.basketball.com",
+  "input_description": "Round and orange. Can bounce."
+}
+
+###
+PATCH http://localhost:3000/products/106
+content-type: application/json
+
+{
+  "name": "pumpkin",
+  "price" : 15,
+  "image_url" : "www.google.com",
+  "description" : "Round & orange"
+}
+
+###
+DELETE http://localhost:3000/products/10
