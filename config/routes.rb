@@ -15,4 +15,21 @@ Rails.application.routes.draw do
 
   #delete recipe
   delete "/products/:id" => "products#destroy"
+
+  #guests
+  #users
+  #admins
+
+  #signup
+  post "/users" => "users#create"
+  post "/sessions" => "sessions#create"
+
+  #create order
+  post "/orders" => "orders#create"
+
+  #show order
+  get "/orders/:id" => "orders#show"
+
+  #order index
+  get "/orders" => "orders#index"
 end

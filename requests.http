@@ -1,19 +1,26 @@
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE2MzU0NzMyNzh9.-HQUGMmpgYF1a8Y-Kl2EcJwNP3vIJoas3BTGxtL5JTc
+
+
+
 ###
 GET http://localhost:3000/products.json
 
 ###
 GET http://localhost:3000/products/1.json
+Authorization: Bearer {{jwt}}
 
-###rails create
+###rails create product
 POST http://localhost:3000/products
 content-type: application/json
+Authorization: Bearer {{jwt}}
 
 {
-  "input_name": "Nintendo Switch",
-  "input_price": 30,
-  "input_url": "www.Nintendo.com",
-  "input_description": "For serious gamers.",
-  "input_supplier_id" : 1
+  "input_name": "iphone12",
+  "input_price": 90,
+  "input_description": "So so smart phone.",
+  "input_supplier_id" : 1,
+  "images": ["https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-blue-select-2020?wid=470&hei=556&fmt=png-alpha&.v=1604343704000"]
+
 }
 
 ###
@@ -21,12 +28,56 @@ PATCH http://localhost:3000/products/106
 content-type: application/json
 
 {
-  "name": "pumpkin",
-  "price" : 10,
+  "name": "apple_pie",
+  "price" : 17,
   "image_url" : "www.google.com",
-  "description" : "Round & orange",
-  "supplier_id" : 1
+  "description" : "Round & red",
+  "supplier_id" : 1,
+  "images" : ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeh1ETt7zgWYHwlqNWpEsDnlBTEMuGexzjx62AN2LmFXB5rgJ7ZSnkQCNudumX4-NKNa0&usqp=CAU", "https://images-na.ssl-images-amazon.com/images/I/71qmF0FHj7L.__AC_SY300_SX300_QL70_FMwebp_.jpg"]
 }
 
 ###
-DELETE http://localhost:3000/products/10
+DELETE http://localhost:3000/products/17
+
+###
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name" : "kevin",
+  "email": "kevin@kevin.com",
+  "password": "password",
+  "password_confirmation": "password"
+}
+
+###
+#login
+POST http://localhost:3000/sessions
+Content-Type: application/json
+
+{
+  "email": "kevin@kevin.com",
+  "password": "password"
+}
+
+
+###
+#order create
+POST http://localhost:3000/orders
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+  "product_id" : 99,
+  "quantity" : 3
+}
+
+###
+#orders show
+GET http://localhost:3000/orders/11.json
+Authorization: Bearer {{jwt}}
+
+###
+#orders index
+GET http://localhost:3000/orders
+Authorization: Bearer {{jwt}}

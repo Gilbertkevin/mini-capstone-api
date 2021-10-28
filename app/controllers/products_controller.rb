@@ -1,5 +1,12 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_admin, only: [:create, :update, :destroy]
+
   def index
+    p "HERE IS THE CURRENT USER"
+    p current_user
+    p "THAT WAS THE CURRENT USER"
+    if current_user
+    end
     products = Product.all
     render json: products.as_json
   end
@@ -15,14 +22,18 @@ class ProductsController < ApplicationController
     product = Product.new(
       name: params[:input_name],
       price: params[:input_price],
-      image_url: params[:input_url],
       description: params[:input_description],
       supplier_id: params[:input_supplier_id],
+      user_id: current_user.id,
     )
     if product.save
+      params[:images].each do |image|
+        new_image = Image.new(url: image, product_id: product.id)
+        new_image.save
+      end
       render json: product.as_json
     else
-      render json: { errors: product.errors.full_messages }
+      render json: { errors: product.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -31,7 +42,6 @@ class ProductsController < ApplicationController
 
     product.name = params[:name] || product.name
     product.price = params[:price] || product.price
-    product.image_url = params[:image_url] || product.image_url
     product.description = params[:description] || product.description
     product.supplier_id = params[:supplier_id] || product.supplier_id
 
