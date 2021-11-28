@@ -2,13 +2,9 @@ class ProductsController < ApplicationController
   before_action :authenticate_admin, only: [:create, :update, :destroy]
 
   def index
-    p "HERE IS THE CURRENT USER"
-    p current_user
-    p "THAT WAS THE CURRENT USER"
-    if current_user
-    end
+    category = Category.find_by(name: params[:category])
     products = Product.all
-    render json: products.as_json
+    render json: products
   end
 
   def show

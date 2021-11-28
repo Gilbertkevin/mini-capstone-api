@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   #update product
   patch "/products/:id" => "products#update"
 
-  #delete recipe
+  #delete product
   delete "/products/:id" => "products#destroy"
 
   #guests
@@ -32,4 +32,15 @@ Rails.application.routes.draw do
 
   #order index
   get "/orders" => "orders#index"
+
+  #CARTED_PRODUCTS
+  post "/carted_products" => "carted_products#create"
+  get "/carted_products" => "carted_products#index"
+
+  # delete order
+  delete "/carted_products/:id" => "carted_products#destroy"
 end
+
+
+
+Places to go, saves address

@@ -1,9 +1,13 @@
-@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE2MzU0NzMyNzh9.-HQUGMmpgYF1a8Y-Kl2EcJwNP3vIJoas3BTGxtL5JTc
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MzcyMDM4OTh9.RLTqk_EuN-VCtIzaoFgbDmm6MD2clhUB1dJC6Ejel58
 
 
 
 ###
 GET http://localhost:3000/products.json
+Authorization: Bearer {{jwt}}
+
+###
+GET http://localhost:3000/products.json?category=activities
 
 ###
 GET http://localhost:3000/products/1.json
@@ -28,7 +32,7 @@ PATCH http://localhost:3000/products/106
 content-type: application/json
 
 {
-  "name": "apple_pie",
+  "name": "super apple_pie",
   "price" : 17,
   "image_url" : "www.google.com",
   "description" : "Round & red",
@@ -53,6 +57,7 @@ Content-Type: application/json
 ###
 #login
 POST http://localhost:3000/sessions
+Authorization: Bearer{{jwt}}
 Content-Type: application/json
 
 {
@@ -67,10 +72,6 @@ POST http://localhost:3000/orders
 Authorization: Bearer {{jwt}}
 Content-Type: application/json
 
-{
-  "product_id" : 99,
-  "quantity" : 3
-}
 
 ###
 #orders show
@@ -80,4 +81,23 @@ Authorization: Bearer {{jwt}}
 ###
 #orders index
 GET http://localhost:3000/orders
+Authorization: Bearer {{jwt}}
+
+###
+#carted_products create
+POST http://localhost:3000/carted_products
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+  "user_id" : 3,
+  "product_id" : 5,
+  "quantity" : 2,
+  "status" : "",
+  "order_id" : 3
+}
+
+###
+#carted_products index
+GET http://localhost:3000/carted_products
 Authorization: Bearer {{jwt}}
